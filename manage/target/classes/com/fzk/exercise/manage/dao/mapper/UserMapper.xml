@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fzk.exercise.manage.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.fzk.exercise.manage.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="url" jdbcType="INTEGER" property="url" />
+    <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="vip_status" jdbcType="INTEGER" property="vipStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, username, password, email, phone, url, role, vip_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exercise_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exercise_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fzk.exercise.manage.model.User">
+    insert into exercise_user (id, username, password, 
+      email, phone, url, 
+      role, vip_status, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+      #{role,jdbcType=INTEGER},#{vipStatus,jdbcType=INTEGER}, now(), now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fzk.exercise.manage.model.User">
+    insert into exercise_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="vipStatus != null">
+        vip_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="vipStatus != null">
+        #{vipStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        now(),
+      </if>
+      <if test="updateTime != null">
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzk.exercise.manage.model.User">
+    update exercise_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="vipStatus != null">
+        vip_status = #{vipStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time =now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzk.exercise.manage.model.User">
+    update exercise_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      vip_status = #{vipStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="checkUserName" parameterType="java.lang.String" resultType="int">
+    SELECT count(1) FROM exercise_user
+    WHERE username=#{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="checkEmail" parameterType="java.lang.String" resultType="int">
+    SELECT count(1) FROM exercise_user
+    WHERE email=#{email,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectLogin" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exercise_user
+    WHERE username=#{username,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertUser" parameterType="com.fzk.exercise.manage.model.User">
+    INSERT into exercise_user(
+      username, password, email, phone, role,vip_status, create_time,update_time
+    )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+            #{role,jdbcType=INTEGER},#{vipStatus,jdbcType=INTEGER}, now(),now()
+    )
+  </insert>
+
+  <select id="checkUserNameAndEmail" parameterType="java.lang.String" resultType="int">
+    SELECT count(1)
+    FROM exercise_user
+    WHERE username=#{username,jdbcType=VARCHAR} and email=#{email,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM exercise_user
+    WHERE id=#{id,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateUser" parameterType="com.fzk.exercise.manage.model.User">
+  update exercise_user
+  set username = #{username,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+  email = #{email,jdbcType=VARCHAR},
+  phone = #{phone,jdbcType=VARCHAR},
+  update_time = now()
+  where id = #{id,jdbcType=INTEGER}
+</update>
+
+  <update id="updateUserUrl" parameterType="com.fzk.exercise.manage.model.User">
+    update exercise_user
+    set url = #{url,jdbcType=VARCHAR},
+    update_time = #{updateTime}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getUserIdByEmail" resultType="java.lang.Integer">
+    SELECT id
+    FROM exercise_user
+    WHERE email = #{email,jdbcType=VARCHAR}
+  </select>
+
+  <select id="checkEmailByUserId" parameterType="java.lang.String" resultType="int">
+    SELECT count(1)
+    FROM exercise_user
+    WHERE id = #{id,jdbcType=INTEGER} and email = #{email,jdbcType=VARCHAR}
+  </select>
+
+  <select id="list" parameterType="com.fzk.exercise.manage.model.User" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.username,
+    a.email,
+    a.phone,
+    a.role,
+    a.vip_status
+    FROM exercise_user a
+    <where>
+      <if test=" null != id and '' != id">
+        and a.id = #{id,jdbcType=INTEGER}
+      </if>
+      <!-- 用户名（模糊） -->
+      <if test=" null != username and '' != username">
+        and a.username like '%' #{username,jdbcType=VARCHAR} '%'
+      </if>
+      <if test=" null != email and '' != email">
+        and a.email like '%' #{email,jdbcType=VARCHAR} '%'
+      </if>
+      <if test=" null != role and '' != role or 0 == role">
+        and a.role = #{role,jdbcType=INTEGER}
+      </if>
+      <if test=" null != vipStatus and '' != vipStatus or 0 == vipStatus">
+        and a.vip_status = #{vipStatus,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by a.create_time desc
+
+  </select>
+
+
+</mapper>

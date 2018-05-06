@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>登录</title>
+		<meta name="keywords" content="健身俱乐部信息管理系统，信息管理系统，fzk" />
+		<meta name="description" content="健身俱乐部信息管理系统登录页面" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="plugins/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="plugins/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="plugins/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="plugins/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="plugins/assets/css/ace-rtl.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="plugins/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="plugins/assets/js/html5shiv.js"></script>
+		<script src="plugins/assets/js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="plugins/jquery-confirm/jquery-confirm.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+	</head>
+
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h3>
+									<i class="icon-leaf green"></i>
+									<span class="white">健身俱乐部信息管理系统-后台</span>
+								</h3>
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger center">
+												登 录
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form class="login-form" id="login-form" role="form">
+												<div class="modal-body">
+												<fieldset>
+													<label class="block clearfix" for="loginUsername">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" id="loginUsername" name="loginUsername" placeholder="用户名" />
+															<i class="icon-user"></i>
+														</span>
+														 <p class="text-error" id="loginUsername_tip" style="color:red;"></p>
+													</label>
+
+													<label class="block clearfix" for="loginPassword">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="密码" />
+															<i class="icon-lock"></i>
+														</span>
+														<p class="text-error" id="loginPassword_tip" style="color:red;"></p>
+													</label>
+
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<button type="button" id="loginBtn" class="width-100 pull-right btn btn-sm btn-primary" onclick="login()">
+															<i class="icon-key"></i>
+															登 录
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</div>
+											</form>
+										</div><!-- /widget-main -->
+
+										<div class="toolbar clearfix">
+											<div>
+												<a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+													<i class="icon-arrow-left"></i>
+													忘记密码
+												</a>
+											</div>
+
+											<div>
+												<a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+													注册
+													<i class="icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div><!-- /widget-body -->
+								</div><!-- /login-box -->
+
+								<div id="forgot-box" class="forgot-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="icon-key"></i>
+												忘记密码
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												输入用户名和注册时的邮箱
+											</p>
+
+											<form class="forget-password-form" id="forget-password-form" role="form">
+												<div class="modal-body">
+												<fieldset>
+													<label class="block clearfix" for="forgetUsername">
+														<span class="block input-icon input-icon-right">
+															<input type="text" class="form-control" id="forgetUsername" name="forgetUsername" placeholder="用户名" />
+															<i class="icon-user"></i>
+														</span>
+														<p class="text-error" id="forgetUsername_tip" style="color:red;"></p>
+													</label>
+													<label class="block clearfix"  for="forgetEmail">
+														<span class="block input-icon input-icon-right">
+															<input type="email" class="form-control" id="forgetEmail" name="forgetEmail" placeholder="Email" />
+															<i class="icon-envelope"></i>
+														</span>
+														<p class="text-error" id="forgetEmail_tip" style="color:red;"></p>
+													</label>
+
+													<div class="clearfix">
+														<label class="inline-block clearfix width-65" for="forgetCode">
+															<span class="block input-icon input-icon-right">
+																<input type="text" name="forgetCode" id="forgetCode" name="forgetCode" class="width-100 pull-left form-control" placeholder="验证码" />
+															</span>
+															<p class="text-error" id="forgetCode_tip" style="color:red;"></p>
+														</label>
+														<button type="button" id="pushCode" class="pushCode width-35 pull-right btn btn-sm btn-danger" onclick="pushCodeTo()">
+															<i class="icon-lightbulb"></i>
+															发送验证码
+														</button>
+													</div>
+													<label class="block clearfix" for="forgetPassword">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="forgetPassword" name="forgetPassword" class="form-control" placeholder="新密码" />
+															<i class="icon-key"></i>
+														</span>
+														<p class="text-error" id="forgetPassword_tip" style="color:red;"></p>
+													</label>
+													<label class="block clearfix" for="forgetNewPassword">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="forgetNewPassword" name="forgetNewPassword" class="form-control" placeholder="再次输入新密码" />
+															<i class="icon-key"></i>
+														</span>
+														<p class="text-error" id="forgetNewPassword_tip" style="color:red;"></p>
+													</label>
+													<div class="clearfix">
+														<button type="button" id="forgetUpdate" class="width-100 pull-right btn btn-sm btn-primary" onclick="updatePassword()">
+															<i class="icon-retweet"></i>
+															修改
+														</button>
+													</div>
+												</fieldset>
+											</div>
+											</form>
+										</div><!-- /widget-main -->
+
+										<div class="toolbar center">
+											<a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+												返回登录
+												<i class="icon-arrow-right"></i>
+											</a>
+										</div>
+									</div><!-- /widget-body -->
+								</div><!-- /forgot-box -->
+
+								<div id="signup-box" class="signup-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header green lighter bigger">
+												<i class="icon-group blue"></i>
+												注 册
+											</h4>
+
+											<div class="space-6"></div>
+											<p> 输入你的信息: </p>
+
+											<form class="register-form" id="register-form" role="form">
+												<div class="modal-body">
+												<fieldset>
+
+													<label class="block clearfix" for="regUsername">
+														<span class="block input-icon input-icon-right">
+															<input type="text" id="regUsername" name="regUsername" class="form-control" placeholder="用户名" />
+															<i class="icon-user"></i>
+														</span>
+														<p class="text-error" id="regUsername_tip" style="color:red;"></p>
+													</label>
+													<label class="block clearfix" for="regEmail">
+														<span class="block input-icon input-icon-right">
+															<input type="email" id="regEmail" name="regEmail" class="form-control" placeholder="Email" />
+															<i class="icon-envelope"></i>
+														</span>
+														<p class="text-error" id="regEmail_tip" style="color:red;"></p>
+													</label>
+
+													<label class="block clearfix" for="regPassword">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="regPassword" name="regPassword" class="form-control" placeholder="密码" />
+															<i class="icon-lock"></i>
+														</span>
+														<p class="text-error" id="regPassword_tip" style="color:red;"></p>
+													</label>
+
+													<label class="block clearfix" for="regNewPassword">
+														<span class="block input-icon input-icon-right">
+															<input type="password" id="regNewPassword" name="regNewPassword" class="form-control" placeholder="再次输入密码" />
+															<i class="icon-retweet"></i>
+														</span>
+														<p class="text-error" id="regNewPassword_tip" style="color:red;"></p>
+													</label>
+													<label class="block clearfix" for="regPhone">
+														<span class="block input-icon input-icon-right">
+															<input type="text" id="regPhone" name="regPhone" class="form-control" placeholder="手机号码" />
+															<i class="fas fa-phone icon-phone"></i>
+														</span>
+														<p class="text-error" id="regPhone_tip" style="color:red;"></p>
+													</label>
+
+													<label class="block">
+														<input type="checkbox" class="ace" id="regAgree" name="regAgree" required />
+														<span class="lbl">
+															我同意
+															<a href="#">用户协议</a>
+														</span>
+														<p class="text-error" id="regAgree_tip" style="color:red;"></p>
+													</label>
+
+													<div class="space-24"></div>
+
+													<div class="clearfix">
+														<button type="reset" id="register-reset" class="register-reset width-30 pull-left btn btn-sm">
+															<i class="icon-refresh"></i>
+															重置
+														</button>
+
+														<button type="button" id="registerBtn" class="register-btn width-65 pull-right btn btn-sm btn-success" onclick="register()">
+															注册
+															<i class="icon-arrow-right icon-on-right"></i>
+														</button>
+													</div>
+												</fieldset>
+											</div>
+											</form>
+										</div>
+
+										<div class="toolbar center">
+											<a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+												<i class="icon-arrow-left"></i>
+												返回登录
+											</a>
+										</div>
+									</div><!-- /widget-body -->
+								</div><!-- /signup-box -->
+							</div><!-- /position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='plugins/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='plugins/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='plugins/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+			function show_box(id) {
+			 jQuery('.widget-box.visible').removeClass('visible');
+			 jQuery('#'+id).addClass('visible');
+			}
+		</script>
+
+	<script type="text/javascript" src="plugins/assets/js/bootstrap.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+	<script src="plugins/jquery-confirm/jquery-confirm.min.js"></script>
+	<script src="js/lib/amrirey.confirm.js"></script>
+	<script type="text/javascript" src="plugins/validate/js/jquery.validate.min.js"></script>
+	<script src="plugins/validate/js/localization/messages_zh.min.js"></script>
+	<script src="js/lib/base.path.js"></script>
+	<script src="js/lib/amrirey.regex.js"></script>
+	<script type="text/javascript" src="js/lib/amrirey.constant.js"></script>
+	<script src="js/lib/amrirey.validation.methods.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+	
+</body>
+</html>

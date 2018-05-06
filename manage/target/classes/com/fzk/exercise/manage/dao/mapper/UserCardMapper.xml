@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzk.exercise.manage.dao.UserCardMapper" >
+  <resultMap id="BaseResultMap" type="com.fzk.exercise.manage.model.UserCard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="lost_status" property="lostStatus" jdbcType="INTEGER" />
+    <result column="use_status" property="useStatus" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, start_time, end_time, lost_status, use_status, del_flag, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exercise_user_card
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exercise_user_card
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fzk.exercise.manage.model.UserCard" >
+    insert into exercise_user_card (id, user_id, start_time,
+      end_time, lost_status, use_status,
+      del_flag, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP},
+      #{endTime,jdbcType=TIMESTAMP}, #{lostStatus,jdbcType=INTEGER}, #{useStatus,jdbcType=INTEGER},
+      #{delFlag,jdbcType=INTEGER}, now(), now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fzk.exercise.manage.model.UserCard" >
+    insert into exercise_user_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="lostStatus != null" >
+        lost_status,
+      </if>
+      <if test="useStatus != null" >
+        use_status,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lostStatus != null" >
+        #{lostStatus,jdbcType=INTEGER},
+      </if>
+      <if test="useStatus != null" >
+        #{useStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzk.exercise.manage.model.UserCard" >
+    update exercise_user_card
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lostStatus != null" >
+        lost_status = #{lostStatus,jdbcType=INTEGER},
+      </if>
+      <if test="useStatus != null" >
+        use_status = #{useStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzk.exercise.manage.model.UserCard" >
+    update exercise_user_card
+    set user_id = #{userId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      lost_status = #{lostStatus,jdbcType=INTEGER},
+      use_status = #{useStatus,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="list" parameterType="com.fzk.exercise.manage.model.UserCard" resultMap="BaseResultMap">
+    SELECT
+      a.id,
+    a.user_id,
+    a.start_time,
+    a.end_time,
+    a.lost_status,
+    a.use_status
+    FROM exercise_user_card a
+    where del_flag = 0
+    <if test=" null != id and '' != id">
+      and a.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test=" null != userId and '' != userId">
+      and a.user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test=" null != useStatus and '' != useStatus or 0 == useStatus">
+      and a.use_status = #{useStatus,jdbcType=INTEGER}
+    </if>
+    <if test=" null != lostStatus and '' != lostStatus or 0 == lostStatus">
+      and a.lost_status = #{lostStatus,jdbcType=INTEGER}
+    </if>
+    <!-- 开始时间范围 -->
+    <if test="startTimeFrom != null">
+      <![CDATA[  and DATE_FORMAT(start_time, '%Y-%m-%d %H:%T:%s') >=
+        DATE_FORMAT(#{startTimeFrom}, '%Y-%m-%d %H:%T:%s')   ]]>
+    </if>
+    <if test="startTimeTo != null">
+      <![CDATA[  and DATE_FORMAT(start_time, '%Y-%m-%d %H:%T:%s') <=
+        DATE_FORMAT(#{startTimeTo} , '%Y-%m-%d %H:%T:%s')    ]]>
+    </if>
+
+    order by a.create_time desc
+
+  </select>
+
+
+
+  <insert id="grantCard" parameterType="java.lang.String" useGeneratedKeys="true" keyProperty="id">
+    insert into exercise_user_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="lostStatus != null" >
+        lost_status,
+      </if>
+      <if test="useStatus != null" >
+        use_status,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lostStatus != null" >
+        #{lostStatus,jdbcType=INTEGER},
+      </if>
+      <if test="useStatus != null" >
+        #{useStatus,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateCard" parameterType="com.fzk.exercise.manage.model.UserCard">
+    UPDATE exercise_user_card
+    set
+    end_time = #{endTime}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <update id="cardLostStatus" parameterType="java.lang.Integer">
+    UPDATE exercise_user_card
+    set
+      lost_status = 1,
+      use_status = 1,
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="cardUseStatus" parameterType="java.lang.Integer">
+    UPDATE exercise_user_card
+    set
+    lost_status = 0,
+    use_status = 0,
+    update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="cardDelStatus" parameterType="java.lang.Integer">
+    UPDATE exercise_user_card
+    set
+    lost_status = 0,
+    use_status = 1,
+    del_flag = 1,
+    update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

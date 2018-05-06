@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: commons-io:commons-io:2.0.1">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/commons-io/commons-io/2.0.1/commons-io-2.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/commons-io/commons-io/2.0.1/commons-io-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

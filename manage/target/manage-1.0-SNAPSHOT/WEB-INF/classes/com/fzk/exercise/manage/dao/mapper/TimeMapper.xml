@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzk.exercise.manage.dao.TimeMapper" >
+  <resultMap id="BaseResultMap" type="com.fzk.exercise.manage.model.Time" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exercise_place
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exercise_place
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fzk.exercise.manage.model.Place" >
+    insert into exercise_place (id, desc)
+    values (#{id,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fzk.exercise.manage.model.Place" >
+    insert into exercise_place
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzk.exercise.manage.model.Place" >
+    update exercise_place
+    <set >
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzk.exercise.manage.model.Place" >
+    update exercise_place
+    set desc = #{desc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="list" parameterType="com.fzk.exercise.manage.model.Course" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.desc,
+    FROM exercise_place a
+    WHERE a.del_flag = 0
+    <if test=" null != id and '' != id">
+      and a.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test=" null != desc and '' != desc">
+      and a.desc like '%' #{desc,jdbcType=VARCHAR} '%'
+    </if>
+  </select>
+</mapper>

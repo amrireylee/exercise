@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans">
+
+</beans>
+        <!--<beans:beans xmlns="http://www.springframework.org/schema/security"-->
+             <!--xmlns:b="http://www.springframework.org/schema/beans" xmlns:beans="http://www.springframework.org/schema/beans"-->
+             <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+             <!--xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd-->
+                        <!--http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">-->
+
+    <!--<http >-->
+        <!--&lt;!&ndash; 不拦截login.jsp &ndash;&gt;-->
+        <!--<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+        <!--&lt;!&ndash;仅拦截到manager下面的内容，具备access对应权限的&ndash;&gt;-->
+        <!--<intercept-url pattern="/manager/**" access="ROLE_ADMIN,ROLE_UPDATE_FILM,ROLE_DELETE_FILM,ROLE_ADD_FILM" />-->
+        <!--&lt;!&ndash; 设置登录过滤器 &ndash;&gt;-->
+        <!--<custom-filter before="FORM_LOGIN_FILTER" ref="authenticationProcessingFilter" />-->
+        <!--&lt;!&ndash; 登录表单设置 &ndash;&gt;-->
+        <!--<form-login login-page="/login.jsp"-->
+                    <!--default-target-url="/manager/films.jsp"-->
+                    <!--authentication-failure-url="/login.jsp?error=true" />-->
+
+        <!--&lt;!&ndash; 登出操作后跳转到该页面 &ndash;&gt;-->
+        <!--<logout logout-success-url="/loggedout.jsp"-->
+                <!--delete-cookies="JSESSIONID" />-->
+        <!--<remember-me />-->
+
+        <!--&lt;!&ndash; SESSION超时后跳转到该页面 &ndash;&gt;-->
+        <!--<session-management invalid-session-url="/timeout.jsp">-->
+        <!--</session-management>-->
+    <!--</http>-->
+
+    <!--<authentication-manager alias="authenticationManager">-->
+        <!--<authentication-provider>-->
+            <!--&lt;!&ndash;-->
+                <!--直接使用SQL语句查询登录帐号对应权限，-->
+                <!--users-by-username-query：查询登录用户是否存在-->
+                <!--authorities-by-username-query：查询登录用户权限(登录用户可以不属于任何组，从t_user_role表中获取权限)-->
+                <!--group-authorities-by-username-query：查询登录用户所在组的权限-->
+            <!--&ndash;&gt;-->
+           <!--&lt;!&ndash; <jdbc-user-service data-source-ref="dataSource"-->
+                               <!--group-authorities-by-username-query="SELECT g.id,g.groupname,role.role-->
+                             <!--FROM t_group AS g-->
+                             <!--LEFT OUTER JOIN t_group_role AS grouprole ON (g.id = grouprole.groupid)-->
+                             <!--LEFT OUTER JOIN t_role AS role ON (role.id = grouprole.roleid)-->
+                             <!--LEFT OUTER JOIN t_group_user AS groupuser on (g.id = groupuser.groupid)-->
+                             <!--LEFT OUTER JOIN t_admin ON (t_admin.id = groupuser.userid)-->
+                             <!--WHERE t_admin.nickname = ?"-->
+                               <!--users-by-username-query="SELECT t_admin.nickname AS username,t_admin.passwd as password,'true' AS enabled-->
+                             <!--FROM t_admin-->
+                             <!--WHERE t_admin.nickname = ?"-->
+                               <!--authorities-by-username-query="SELECT t_admin.nickname AS username,role.role as authorities-->
+                               <!--FROM t_admin-->
+                               <!--LEFT OUTER JOIN t_user_role AS userrole ON(t_admin.id = userrole.userid)-->
+                               <!--LEFT OUTER JOIN t_role AS role ON (userrole.roleid = role.id)-->
+                               <!--WHERE t_admin.nickname = ?" />&ndash;&gt;-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+    <!--&lt;!&ndash; 自定义消息 &ndash;&gt;-->
+    <!--&lt;!&ndash;<b:bean id="messageSource"-->
+            <!--class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
+        <!--<b:property name="basename"-->
+                    <!--value="classpath:org/springframework/security/messages" />-->
+    <!--</b:bean>-->
+
+    <!--&lt;!&ndash; 定制登录过滤器 &ndash;&gt;-->
+    <!--<beans:bean id="loginSuccessHandler" class="com.xxx.security.LoginSuccessHandler">-->
+        <!--<b:property name="defaultTargetUrl">-->
+            <!--&lt;!&ndash; 登录成功后转发到该页面 &ndash;&gt;-->
+            <!--<b:value>/manager/films.jsp</b:value>-->
+        <!--</b:property>-->
+    <!--</beans:bean>-->
+    <!--<beans:bean id="authenticationProcessingFilter" class="com.xxx.security.LoginUsernamePasswordAuthenticationFilter">-->
+        <!--<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler"></beans:property>-->
+        <!--<beans:property name="authenticationFailureHandler" ref="authenticationFailureHandler"></beans:property>-->
+        <!--<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>-->
+    <!--</beans:bean>-->
+    <!--<beans:bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">-->
+        <!--<beans:property name="defaultFailureUrl">-->
+            <!--&lt;!&ndash; 登录失败后转发到该页面 &ndash;&gt;-->
+            <!--<beans:value>/login.jsp?error=true</beans:value>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>&ndash;&gt;-->
+
+<!--</beans:beans>-->

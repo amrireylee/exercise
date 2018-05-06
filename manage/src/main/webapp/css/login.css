@@ -1,0 +1,47 @@
+.login-container h3
+{
+    margin: 40px 0;
+}
+
+.modal-body{
+    padding:0;
+}
+
+.btn-group>.btn>.caret {
+    margin-top:0;
+    border-top: 0;
+}
+
+#btn_save,#btn_detail,#btn_delete,#btn_edit,#btn_receive,#btn_lost,#btn_plus,#edit_replace{
+    margin-right:5px;
+    margin-bottom:5px;
+}
+
+#newRole,#newVipStatus{
+    padding:4px 0;
+}
+#newProjectDesc,#newPlaceDesc{
+    padding:5px 4px;
+
+}
+
+.index-div-block{
+    border: 1px dotted;
+    text-decoration: none;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    padding: 60px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    color:#29b7d3;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.padding0{
+    padding:0;
+}

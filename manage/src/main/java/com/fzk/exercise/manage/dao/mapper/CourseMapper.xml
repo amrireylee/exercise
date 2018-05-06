@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fzk.exercise.manage.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.fzk.exercise.manage.model.Course" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="place_id" property="placeId" jdbcType="INTEGER" />
+    <result column="course_time" property="courseTime" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, `desc`, project_id, start_time, end_time, place_id, course_time, user_id,
+    money, img, del_flag, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exercise_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exercise_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fzk.exercise.manage.model.Course" >
+    insert into exercise_course (id, name, `desc`,
+      project_id, start_time, end_time, 
+      place_id, course_time, user_id, 
+      money, img, del_flag, create_time,
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{placeId,jdbcType=INTEGER}, #{courseTime,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+      #{money,jdbcType=DECIMAL}, #{img,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, now(),
+            now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.fzk.exercise.manage.model.Course" >
+    insert into exercise_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="desc != null" >
+        `desc`,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="placeId != null" >
+        place_id,
+      </if>
+      <if test="courseTime != null" >
+        course_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeId != null" >
+        #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseTime != null" >
+        #{courseTime,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fzk.exercise.manage.model.Course" >
+    update exercise_course
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        `desc` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeId != null" >
+        place_id = #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseTime != null" >
+        course_time = #{courseTime,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fzk.exercise.manage.model.Course" >
+    update exercise_course
+    set name = #{name,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      place_id = #{placeId,jdbcType=INTEGER},
+      course_time = #{courseTime,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      img = #{img,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="list" parameterType="com.fzk.exercise.manage.model.Course" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.name,
+    a.`desc`,
+    a.project_id,
+    a.start_time,
+    a.end_time,
+    a.place_id,
+    a.course_time,
+    a.user_id,
+    a.money,
+    a.img
+    FROM exercise_course a
+    WHERE a.del_flag = 0
+    <if test=" null != id and '' != id">
+      and a.id = #{id,jdbcType=INTEGER}
+    </if>
+    <!-- 用户名（模糊） -->
+    <if test=" null != name and '' != name">
+      and a.name like '%' #{name,jdbcType=VARCHAR} '%'
+    </if>
+    <if test=" null != desc and '' != desc">
+      and a.`desc` like '%' #{desc,jdbcType=VARCHAR} '%'
+    </if>
+    <if test=" null != projectId and '' != projectId">
+      and a.project_id = #{projectId,jdbcType=VARCHAR}
+    </if>
+    <if test=" null != placeId and '' != placeId">
+      and a.place_id = #{placeId,jdbcType=VARCHAR}
+    </if>
+    <!-- 价格范围 -->
+    <if test="moneyFrom != null and '' != moneyFrom">
+      <![CDATA[  and money > =#{moneyFrom}]]>
+    </if>
+    <if test="moneyTo != null and '' != moneyFrom">
+      <![CDATA[  and money <= #{moneyTo}]]>
+    </if>
+    order by a.create_time desc
+
+  </select>
+
+  <insert id="insertCourse"  parameterType="com.fzk.exercise.manage.model.Course" >
+    INSERT into exercise_course(
+    name,`desc`,project_id,start_time,end_time,place_id,course_time,user_id,
+      money,img,del_flag, create_time,update_time
+    )
+    values (#{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},#{projectId,jdbcType=INTEGER},
+            #{startTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP},
+            #{placeId,jdbcType=INTEGER},#{courseTime,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},
+            #{money,jdbcType=DECIMAL},#{img,jdbcType=VARCHAR},#{delFlag,jdbcType=INTEGER},
+            now(),now()
+    )
+  </insert>
+
+  <select id="selectById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from exercise_course a
+    where a.id in
+    <foreach collection="Ids" item="id" index="index"
+             open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+</mapper>
